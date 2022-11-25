@@ -202,7 +202,7 @@ coverage
 npm i -D husky
 npm pkg set scripts.prepare="husky install"
 npm run prepare
-npx husky add .husky/pre-commit "npm run tidy && npm run lint && npm run test --watch=false --silent --passWithNoTests"
+npx husky add .husky/pre-commit "npm run tidy && npm run lint && npx vitest --watch=false --silent --passWithNoTests"
 ```
 
 `.husky/pre-commit`
@@ -211,7 +211,7 @@ npx husky add .husky/pre-commit "npm run tidy && npm run lint && npm run test --
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run tidy && npm run lint && npm run test --watch=false --silent --passWithNoTests
+npm run tidy && npm run lint && npx vitest --watch=false --silent --passWithNoTests
 ```
 
 **References**
