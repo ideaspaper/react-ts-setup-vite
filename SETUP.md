@@ -14,6 +14,61 @@ npm i
 - [Vite - Getting Started](https://vitejs.dev/guide/)
 - [npm - scripts](https://docs.npmjs.com/cli/v9/using-npm/scripts)
 
+## Testing Library
+
+```
+npm install vitest --save-dev
+```
+
+`package.json`
+
+```json
+...
+  "scripts": {
+    ...
+    "test": "vitest"
+  },
+...
+```
+
+```
+npm install jsdom --save-dev
+npm install @testing-library/react @testing-library/jest-dom --save-dev
+```
+
+`testSetup.ts`
+
+```ts
+import { expect, afterEach } from 'vitest';
+import { cleanup } from '@testing-library/react';
+import matchers from '@testing-library/jest-dom/matchers';
+
+// extends Vitest's expect method with methods from react-testing-library
+expect.extend(matchers);
+
+// runs a cleanup after each test case (e.g. clearing jsdom)
+afterEach(() => {
+  cleanup();
+});
+```
+
+`vite.config.ts`
+
+```ts
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    setupFiles: './testSetup.ts'
+  }
+})
+```
+
 ## ESLint
 
 ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
@@ -114,6 +169,14 @@ npm i -D prettier
 }
 ```
 
+`.prettierignore`
+
+```
+build
+dist
+coverage
+```
+
 `package.json`
 
 ```json
@@ -139,7 +202,7 @@ npm i -D prettier
 npm i -D husky
 npm pkg set scripts.prepare="husky install"
 npm run prepare
-npx husky add .husky/pre-commit "npm run tidy && npm run lint"
+npx husky add .husky/pre-commit "npm run tidy && npm run lint && npm run test --watch=false --silent --passWithNoTests"
 ```
 
 `.husky/pre-commit`
@@ -148,7 +211,7 @@ npx husky add .husky/pre-commit "npm run tidy && npm run lint"
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run tidy && npm run lint
+npm run tidy && npm run lint && npm run test --watch=false --silent --passWithNoTests
 ```
 
 **References**
@@ -156,3 +219,6 @@ npm run tidy && npm run lint
 - [npm - husky](https://www.npmjs.com/package/husky)
 - [git - Customizing Git - Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 - [Altlassian - Git Hooks](https://www.atlassian.com/git/tutorials/git-hooks)
+
+
+https://www.robinwieruch.de/vitest-react-testing-library/
