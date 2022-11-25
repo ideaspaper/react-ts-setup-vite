@@ -219,6 +219,3 @@ npm run tidy && npm run lint && npx vitest --watch=false --silent --passWithNoTe
 - [npm - husky](https://www.npmjs.com/package/husky)
 - [git - Customizing Git - Git Hooks](https://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks)
 - [Altlassian - Git Hooks](https://www.atlassian.com/git/tutorials/git-hooks)
-
-
-https://www.robinwieruch.de/vitest-react-testing-library/
