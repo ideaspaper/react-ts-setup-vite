@@ -228,7 +228,7 @@ Husky is a package that allows custom scripts to be ran against your Git reposit
 npm i -D husky
 npm pkg set scripts.prepare="husky install"
 npm run prepare
-npx husky add .husky/pre-commit "npm run tidy && npm run lint && npx vitest --watch=false --silent --passWithNoTests"
+npx husky add .husky/pre-commit "npx lint-staged && npm run lint && npx vitest --watch=false --silent --passWithNoTests"
 ```
 
 `.husky/pre-commit`
