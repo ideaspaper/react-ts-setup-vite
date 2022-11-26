@@ -198,6 +198,8 @@ coverage
 
 ## Husky
 
+Husky is a package that allows custom scripts to be ran against your Git repository. These scripts trigger actions in response to specific events, so they can help you automate your development lifecycle.
+
 ```
 npm i -D husky
 npm pkg set scripts.prepare="husky install"
