@@ -55,8 +55,8 @@ afterEach(() => {
 `vite.config.ts`
 
 ```ts
-import { defineConfig } from 'vitest/config'
-import react from '@vitejs/plugin-react'
+import { defineConfig } from 'vitest/config';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -64,9 +64,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './testSetup.ts'
-  }
-})
+    setupFiles: './testSetup.ts',
+  },
+});
 ```
 
 ## ESLint
@@ -196,6 +196,30 @@ coverage
 
 [Source](https://blog.logrocket.com/using-prettier-eslint-automate-formatting-fixing-javascript/#managing-eslint-rules-avoid-conflict-prettier)
 
+## lint-staged
+
+Run linters **against staged Git files** and don't let 💩 slip into your code base!
+
+```
+npm i -D lint-staged
+```
+
+`package.json`
+
+```json
+...
+  "lint-staged": {
+    "*.{js,ts,tsx,json,md,html}": [
+      "prettier --write"
+    ]
+  }
+...
+```
+
+**References**
+
+- [npm - lint-staged](https://www.npmjs.com/package/lint-staged)
+
 ## Husky
 
 Husky is a package that allows custom scripts to be ran against your Git repository. These scripts trigger actions in response to specific events, so they can help you automate your development lifecycle.
@@ -213,7 +237,7 @@ npx husky add .husky/pre-commit "npm run tidy && npm run lint && npx vitest --wa
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm run tidy && npm run lint && npx vitest --watch=false --silent --passWithNoTests
+npx lint-staged && npm run lint && npx vitest --watch=false --silent --passWithNoTests
 ```
 
 **References**
